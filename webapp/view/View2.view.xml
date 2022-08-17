@@ -1,0 +1,263 @@
+<mvc:View
+		controllerName="zescmatrizcost.controller.View2"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns="sap.m"
+		xmlns:f="sap.f"
+		xmlns:layout="sap.ui.layout"
+        xmlns:fb="sap.ui.comp.filterbar"
+        xmlns:core="sap.ui.core"
+		height="100%"
+        displayBlock="true">
+		<f:DynamicPage id="View2" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}" showFooter="true">
+			<!-- DynamicPage Title -->
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>title}"/>
+					</f:heading>
+					<f:breadcrumbs>
+						<Breadcrumbs>
+							<Link text="{i18n>furtherNav1}" />
+							<Link text="{i18n>furtherNav2}" />
+						</Breadcrumbs>
+					</f:breadcrumbs>
+					<!-- <f:expandedContent>
+						<Label text="This is a subheading"/>
+					</f:expandedContent>
+					<f:snappedContent>
+						<Label text="This is a subheading"/>
+					</f:snappedContent> -->
+					<!-- <f:snappedTitleOnMobile>
+						<Title text="This is a subheading"/>
+					</f:snappedTitleOnMobile> -->
+					<!-- <f:content>
+						<OverflowToolbar>
+							<GenericTag text="SR"
+								status="Error"
+								press="onPressOpenPopover"
+								design="StatusIconHidden">
+								<ObjectNumber number="2"
+									unit="M"
+									emphasized="false"
+									state="Error"/>
+							</GenericTag>
+						</OverflowToolbar>
+					</f:content> -->
+					<!-- <f:actions>
+						<Button
+								text="Edit"
+								type="Emphasized"
+								press="toggleAreaPriority"/>
+						<Button
+								text="Delete"
+								type="Transparent"/>
+						<Button
+								text="Copy"
+								type="Transparent"/>
+						<Button
+								text="Toggle Footer"
+								type="Transparent"
+								press="onToggleFooter"/>
+						<Button
+								icon="sap-icon://action"
+								type="Transparent"/>
+						<Button
+								text="Button with layoutData"
+								type="Transparent"
+								press="onPressOpenPopover">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="AlwaysOverflow" closeOverflowOnInteraction="false" />
+							</layoutData>
+						</Button>
+					</f:actions> -->
+					<!-- <f:navigationActions>
+						<Button
+								icon="sap-icon://full-screen"
+								type="Transparent" />
+						<Button
+								icon="sap-icon://exit-full-screen"
+								type="Transparent" />
+						<Button
+								icon="sap-icon://decline"
+								type="Transparent" />
+					</f:navigationActions> -->
+				</f:DynamicPageTitle>
+			</f:title>
+			<!-- DynamicPage Header -->
+			
+			<f:content>
+				<Table id="idChangeTable"
+						sticky="HeaderToolbar,ColumnHeaders"
+						inset="false"
+						items="{
+							path: 'changeModel>/',
+							sorter: {
+								path: 'Role'
+							}
+						}"
+					   class="sapFDynamicPageAlignContent"
+					   width="auto"
+                       growing="true"
+                       growingThreshold="20"
+                       mode="MultiSelect"
+                       selectionChange="onListItemPressed"
+                       >
+					<!-- <headerToolbar>
+						<Toolbar>
+							<Title text="Products" level="H2"/>
+						</Toolbar>
+					</headerToolbar> -->
+					<columns>
+						<Column id="costObjectColumn">
+							<Text text="{i18n>costObject}" />
+						</Column>
+						
+						<Column id="projectColumn">
+							<Text text="{i18n>project}" />
+						</Column>
+
+						<Column id="budgetPackColumn">
+							<Text text="{i18n>budgetPack}" />
+						</Column>
+
+                        <Column id="esiCodeColumn">
+							<Text text="{i18n>esiCode}" />
+						</Column>
+
+                        <Column id="costControllerColumn">
+							<Text text="{i18n>costController}" />
+						</Column>
+
+                        <Column id="lev1Column">
+							<Text text="{i18n>lev1}" />
+						</Column>
+
+                        <Column id="lev2Column">
+							<Text text="{i18n>lev2}" />
+						</Column>
+
+                        <Column id="lev3Column">
+							<Text text="{i18n>lev3}" />
+						</Column>
+
+                        <Column id="lev4Column">
+							<Text text="{i18n>lev4}" />
+						</Column>
+
+                        <Column id="level5Column">
+							<Text text="{i18n>level5}" />
+						</Column>
+
+                        <Column id="authoTypeColumn">
+							<Text text="{i18n>authoType}" />
+						</Column>
+
+                        
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+                                
+                                <HBox>
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                                     <Label text="{changeModel>Costobject}" design="Bold"/>
+                                     <Text text="{changeModel>CostObjectType}"/>
+                                     <Text text="{changeModel>CostObjectName}" />  
+                                    </VBox>
+                                </HBox>
+
+                                <Text text="{changeModel>Project}"/>
+
+                                <Text text="{changeModel>Budgetpack}"/>
+
+                                <ObjectNumber
+										number="{path:'changeModel>Esicode'}" />
+
+                                <Input
+                                        showValueHelp="true"
+                                        id="idCostControllerInput"
+                                        value="{changeModel>Costcontroller}"
+                                        valueHelpRequest="onValueHelpRequest">
+                                  </Input>
+                                <HBox>
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+                                     <Input
+                                        showValueHelp="true"
+                                        id="idLevel1Input"
+                                        value="{changeModel>Level1role}"
+                                        valueHelpRequest="onValueHelpRequest">
+                                     </Input>
+                                     <Text text="{parts: ['changeModel>Level1roleMaxAmount','changeModel>Level1roleWaers'] , type: 'sap.ui.model.type.Currency',formatOptions: {currencyCode: false}}" />
+                                     <Text text="{changeModel>Level1userName}" />
+                                    </VBox>
+                                </HBox>
+
+                                <HBox>
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                                     <Input
+                                        showValueHelp="true"
+                                        id="idLevel2Input"
+                                        value="{changeModel>Level2role}"
+                                        valueHelpRequest="onValueHelpRequest">
+                                     </Input>
+                                     <Text text="{parts: ['changeModel>Level2roleMaxAmount','changeModel>Level2roleWaers'] , type: 'sap.ui.model.type.Currency',formatOptions: {currencyCode: false}}" />
+                                     <Text text="{changeModel>Level2userName}" />
+                                    </VBox>
+                                </HBox>
+
+                                <HBox>
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                                     <Input
+                                        showValueHelp="true"
+                                        id="idLevel3Input"
+                                        value="{changeModel>Level3role}"
+                                        valueHelpRequest="onValueHelpRequest">
+                                     </Input>
+                                     <Text text="{parts: ['changeModel>Level3roleMaxAmount','changeModel>Level3roleWaers'] , type: 'sap.ui.model.type.Currency',formatOptions: {currencyCode: false}}" />
+                                     <Text text="{changeModel>Level3userName}" />
+                                    </VBox>
+                                </HBox>
+
+                                <HBox>
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                                     <Input
+                                        showValueHelp="true"
+                                        id="idLevel4Input"
+                                        value="{changeModel>Level4role}"
+                                        valueHelpRequest="onValueHelpRequest">
+                                     </Input>
+                                     <Text text="{parts: ['changeModel>Level4roleMaxAmount','changeModel>Level4roleWaers'] , type: 'sap.ui.model.type.Currency',formatOptions: {currencyCode: false}}" />
+                                     <Text text="{changeModel>Level4userName}" />
+                                    </VBox>
+                                </HBox>
+
+                                
+                                <HBox>
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                                     <Input
+                                        showValueHelp="true"
+                                        id="idLevel5Input"
+                                        value="{changeModel>Level5role}"
+                                        valueHelpRequest="onValueHelpRequest">
+                                     </Input>
+                                     <Text text="{parts: ['changeModel>Level5roleMaxAmount','changeModel>Level5roleWaers'] , type: 'sap.ui.model.type.Currency',formatOptions: {currencyCode: false}}" />
+                                     <Text text="{changeModel>Level5userName}" />
+                                    </VBox>
+                                </HBox>
+
+                                <Text text="{changeModel>Authorizationtype}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</f:content>
+			<!-- DynamicPage Footer -->
+			<f:footer>
+				<OverflowToolbar>
+					<ToolbarSpacer/>
+					<Button type="Emphasized" text="{i18n>createnewrole}" press=".onPressNewRole"/>
+					<Button type="Emphasized" text="{i18n>changeselectedroles}" press=".onPressEdit"/>
+				</OverflowToolbar>
+			</f:footer>
+		</f:DynamicPage>
+</mvc:View>

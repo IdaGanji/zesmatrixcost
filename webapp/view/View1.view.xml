@@ -1,0 +1,389 @@
+
+<mvc:View
+		controllerName="zescmatrizcost.controller.View1"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns="sap.m"
+		xmlns:f="sap.f"
+		xmlns:layout="sap.ui.layout"
+        xmlns:fb="sap.ui.comp.filterbar"
+        xmlns:core="sap.ui.core"
+		height="100%"
+        displayBlock="true">
+		<f:DynamicPage id="View1" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}" showFooter="true">
+			<!-- DynamicPage Title -->
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>title}"/>
+					</f:heading>
+					<f:breadcrumbs>
+						<Breadcrumbs>
+							<Link text="{i18n>furtherNav1}" />
+							<Link text="{i18n>furtherNav2}" />
+						</Breadcrumbs>
+					</f:breadcrumbs>
+					<!-- <f:expandedContent>
+						<Label text="This is a subheading"/>
+					</f:expandedContent>
+					<f:snappedContent>
+						<Label text="This is a subheading"/>
+					</f:snappedContent> -->
+					<!-- <f:snappedTitleOnMobile>
+						<Title text="This is a subheading"/>
+					</f:snappedTitleOnMobile> -->
+					<!-- <f:content>
+						<OverflowToolbar>
+							<GenericTag text="SR"
+								status="Error"
+								press="onPressOpenPopover"
+								design="StatusIconHidden">
+								<ObjectNumber number="2"
+									unit="M"
+									emphasized="false"
+									state="Error"/>
+							</GenericTag>
+						</OverflowToolbar>
+					</f:content> -->
+					<!-- <f:actions>
+						<Button
+								text="Edit"
+								type="Emphasized"
+								press="toggleAreaPriority"/>
+						<Button
+								text="Delete"
+								type="Transparent"/>
+						<Button
+								text="Copy"
+								type="Transparent"/>
+						<Button
+								text="Toggle Footer"
+								type="Transparent"
+								press="onToggleFooter"/>
+						<Button
+								icon="sap-icon://action"
+								type="Transparent"/>
+						<Button
+								text="Button with layoutData"
+								type="Transparent"
+								press="onPressOpenPopover">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="AlwaysOverflow" closeOverflowOnInteraction="false" />
+							</layoutData>
+						</Button>
+					</f:actions> -->
+					<!-- <f:navigationActions>
+						<Button
+								icon="sap-icon://full-screen"
+								type="Transparent" />
+						<Button
+								icon="sap-icon://exit-full-screen"
+								type="Transparent" />
+						<Button
+								icon="sap-icon://decline"
+								type="Transparent" />
+					</f:navigationActions> -->
+				</f:DynamicPageTitle>
+			</f:title>
+			<!-- DynamicPage Header -->
+			<f:header>
+				<f:DynamicPageHeader pinnable="true">
+					<!-- <layout:HorizontalLayout allowWrapping="true"> -->
+                        <fb:FilterBar reset="onReset" search="onSearch" showRestoreButton="true" showClearOnFB="true" clear="onClear">
+                            <fb:filterGroupItems>
+                                <fb:FilterGroupItem groupName="__$INTERNAL$" name="costObjecttype" label="{i18n>costObjectT}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                    <fb:control>
+                                        <Select forceSelection="false" selectedKey="{filterModel>/costObjectType}" id="costObjectTypeSelect">
+                                            <core:Item key="{WBS}" text="{i18n>WBS Element}" />
+                                            <core:Item key="{COS}" text="{i18n>Cost Center}" />
+                                            <core:Item key="{NWO}" text="{i18n>Network}" />
+                                            <core:Item key="{WOR}" text="{i18n>Work Order}" />   
+                                        </Select>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                                <fb:FilterGroupItem groupName="__$INTERNAL$" name="costObject" label="{i18n>costObject}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                    <fb:control>
+                                    <Input
+                                        id="costObjectInput"
+                                        placeholder="Search For Cost Object"
+                                        value="{filterModel>/costObject}">
+                                    </Input>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                                <fb:FilterGroupItem groupName="__$INTERNAL$" name="project" label="{i18n>project}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                    <fb:control>
+                                       <MultiInput
+                                                id="projectInput"
+                                                placeholder="{i18n>searchforproject}"
+                                                showSuggestion="true"
+                                                showValueHelp="true"
+                                                valueHelpRequest=".onProjectValueHelpRequest"
+                                                suggestionItems="{ProjectValueHelpModel>/results}"
+                                                tokens="{filterModel>/project}"
+                                                value="{filterModel>/project/key}"
+                                                tokenUpdate="onOwnerInputChange">
+                                                <suggestionItems>
+                                                    <core:Item text="{ProjectValueHelpModel>ESIProject}" />
+                                                </suggestionItems>
+                                                <tokens>
+                                                    <Token key="{filterModel>key}" text="{filterModel>key}"  />
+                                                </tokens>
+                                            </MultiInput>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                                <fb:FilterGroupItem groupName="__$INTERNAL$" name="budgetPack" label="{i18n>budgetPack}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                    <fb:control>
+                                        <MultiInput
+                                                id="budgetPackInput"
+                                                placeholder="{i18n>searchforbudgetpack}"
+                                                showSuggestion="true"
+                                                showValueHelp="true"
+                                                valueHelpRequest=".onBudgetPackValueHelpRequest"
+                                                suggestionItems="{BudgetPackValueHelpModel>/results}"
+                                                tokens="{filterModel>/budgetPack}"
+                                                value="{filterModel>/budgetPack/key}"
+                                                tokenUpdate="onOwnerInputChange">
+                                                <suggestionItems>
+                                                    <core:Item text="{BudgetPackValueHelpModel>name}" />
+                                                </suggestionItems>
+                                                <tokens>
+                                                    <Token key="{filterModel>key}" text="{filterModel>key}"  />
+                                                </tokens>
+                                            </MultiInput>
+                                        
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                                <fb:FilterGroupItem groupName="__$INTERNAL$" name="esiCode" label="{i18n>esiCode}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                    <fb:control>
+                                        <MultiInput
+                                            id="esiCodeInput"
+                                            placeholder="{i18n>searchforesiCode}"
+                                            showSuggestion="true"
+                                            showValueHelp="true"
+                                            valueHelpRequest=".onESIValueHelpRequest"
+                                            suggestionItems="{ESIValueHelpModel>/results}"
+                                            tokens="{filterModel>/esiCode}"
+                                            value="{filterModel>/esiCode/key}"
+                                            tokenUpdate="onRoleInputChange">
+                                            <tokens>
+                                               <Token  key="{filterModel>key}" text="{filterModel>key}"/>
+                                            </tokens>
+                                            <suggestionItems>
+                                              <core:Item  text="{ESIValueHelpModel>zzesipro}" />
+                                            </suggestionItems>
+                                        </MultiInput>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                                <fb:FilterGroupItem groupName="__$INTERNAL$" name="costController" label="{i18n>costController}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                    <fb:control>
+                                        <MultiInput
+                                            id="costControllerInput"
+                                            placeholder="{i18n>searchforcostController}"
+                                            showSuggestion="true"
+                                            showValueHelp="true"
+                                            valueHelpRequest=".oncostControllerValueHelpRequest"
+                                            suggestionItems="{mainModel>/results}"
+                                            tokens="{filterModel>/budgetPack}"
+                                            value="{filterModel>/budgetPack/key}"
+                                            tokenUpdate="onRoleInputChange">
+                                            <tokens>
+                                               <Token  key="{filterModel>key}" text="{filterModel>text}"/>
+                                            </tokens>
+                                            <suggestionItems>
+                                              <core:Item  text="{mainModel>Role}" />
+                                            </suggestionItems>
+                                        </MultiInput>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                                <fb:FilterGroupItem groupName="__$INTERNAL$" name="role" label="{i18n>role}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                    <fb:control>
+                                        <MultiInput
+                                            id="roleInput"
+                                            placeholder="{i18n>searchforrole}"
+                                            showSuggestion="true"
+                                            showValueHelp="true"
+                                            valueHelpRequest=".onRoleValueHelpRequest"
+                                            suggestionItems="{RoleValueHelpModel>/results}"
+                                            tokens="{filterModel>/role}"
+                                            value="{filterModel>/role/key}"
+                                            tokenUpdate="onRoleInputChange">
+                                            <tokens>
+                                               <Token  key="{filterModel>key}" text="{filterModel>text}"/>
+                                            </tokens>
+                                            <suggestionItems>
+                                              <core:Item  text="{RoleValueHelpModel>Role}" />
+                                            </suggestionItems>
+                                        </MultiInput>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                                <fb:FilterGroupItem groupName="__$INTERNAL$" name="authType" label="{i18n>authType}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                    <fb:control>
+                                        <MultiInput
+                                            id="authTypeInput"
+                                            placeholder="{i18n>searchforrole}"
+                                            showSuggestion="true"
+                                            showValueHelp="true"
+                                            valueHelpRequest=".onauthTypeValueHelpRequest"
+                                            suggestionItems="{mainModel>/results}"
+                                            tokens="{filterModel>/budgetPack}"
+                                            value="{filterModel>/budgetPack/key}"
+                                            tokenUpdate="onRoleInputChange">
+                                            <tokens>
+                                               <Token  key="{filterModel>key}" text="{filterModel>text}"/>
+                                            </tokens>
+                                            <suggestionItems>
+                                              <core:Item  text="{mainModel>Role}" />
+                                            </suggestionItems>
+                                        </MultiInput>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                            </fb:filterGroupItems>
+
+                        </fb:FilterBar>
+                
+					<!-- </layout:HorizontalLayout> -->
+				</f:DynamicPageHeader>
+			</f:header>
+			<f:content>
+				<Table id="idTable"
+						sticky="HeaderToolbar,ColumnHeaders"
+						inset="false"
+						items="{
+							path: 'mainModel>/results',
+							sorter: {
+								path: 'Role'
+							}
+						}"
+					   class="sapFDynamicPageAlignContent"
+					   width="auto"
+                       growing="true"
+                       growingThreshold="20"
+                       mode="MultiSelect"
+                       selectionChange="onListItemPressed"
+                       >
+					<!-- <headerToolbar>
+						<Toolbar>
+							<Title text="Products" level="H2"/>
+						</Toolbar>
+					</headerToolbar> -->
+					<columns>
+						<Column id="costObjectColumn">
+							<Text text="{i18n>costObject}" />
+						</Column>
+						
+						<Column id="projectColumn">
+							<Text text="{i18n>project}" />
+						</Column>
+
+						<Column id="budgetPackColumn">
+							<Text text="{i18n>budgetPack}" />
+						</Column>
+
+                        <Column id="esiCodeColumn">
+							<Text text="{i18n>esiCode}" />
+						</Column>
+
+                        <Column id="costControllerColumn">
+							<Text text="{i18n>costController}" />
+						</Column>
+
+                        <Column id="lev1Column">
+							<Text text="{i18n>lev1}" />
+						</Column>
+
+                        <Column id="lev2Column">
+							<Text text="{i18n>lev2}" />
+						</Column>
+
+                        <Column id="lev3Column">
+							<Text text="{i18n>lev3}" />
+						</Column>
+
+                        <Column id="lev4Column">
+							<Text text="{i18n>lev4}" />
+						</Column>
+
+                        <Column id="level5Column">
+							<Text text="{i18n>level5}" />
+						</Column>
+
+                        <Column id="authoTypeColumn">
+							<Text text="{i18n>authoType}" />
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem selected="{mainModel>Selected}">
+							<cells>
+                                
+                                <HBox>
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                                     <Label text="{mainModel>Costobject}" design="Bold"/>
+                                     <Text text="{mainModel>CostObjectType}"/>
+                                     <Text text="{mainModel>CostObjectName}" />  
+                                    </VBox>
+                                </HBox>
+
+                                <Text text="{mainModel>Project}"/>
+
+                                <Text text="{mainModel>Budgetpack}"/>
+
+                                <ObjectNumber
+										number="{path:'mainModel>Esicode'}" />
+
+                                <Text text="{mainModel>Costcontroller}"/>
+
+                                <HBox>
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                                     <Label text="{mainModel>Level1role}" design="Bold"/>
+                                     <Text text="{parts: ['mainModel>Level1roleMaxAmount','mainModel>Level1roleWaers'] , type: 'sap.ui.model.type.Currency',formatOptions: {currencyCode: false}}" />
+                                     <Text text="{mainModel>Level1userName}" />
+                                    </VBox>
+                                </HBox>
+
+                                <HBox>
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                                     <Label text="{mainModel>Level2role}" design="Bold"/>
+                                     <Text text="{parts: ['mainModel>Level2roleMaxAmount','mainModel>Level2roleWaers'] , type: 'sap.ui.model.type.Currency',formatOptions: {currencyCode: false}}" />
+                                     <Text text="{mainModel>Level2userName}" />
+                                    </VBox>
+                                </HBox>
+
+                                <HBox>
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                                     <Label text="{mainModel>Level3role}" design="Bold"/>
+                                     <Text text="{parts: ['mainModel>Level3roleMaxAmount','mainModel>Level3roleWaers'] , type: 'sap.ui.model.type.Currency',formatOptions: {currencyCode: false}}" />
+                                     <Text text="{mainModel>Level3userName}" />
+                                    </VBox>
+                                </HBox>
+
+                                <HBox>
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                                     <Label text="{mainModel>Level4role}" design="Bold"/>
+                                     <Text text="{parts: ['mainModel>Level4roleMaxAmount','mainModel>Level4roleWaers'] , type: 'sap.ui.model.type.Currency',formatOptions: {currencyCode: false}}" />
+                                     <Text text="{mainModel>Level4userName}" />
+                                    </VBox>
+                                </HBox>
+
+                                
+                                <HBox>
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+                                     <Label text="{mainModel>Level5role}" design="Bold"/>
+                                     <Text text="{parts: ['mainModel>Level5roleMaxAmount','mainModel>Level5roleWaers'] , type: 'sap.ui.model.type.Currency',formatOptions: {currencyCode: false}}" />
+                                     <Text text="{mainModel>Level5userName}" />
+                                    </VBox>
+                                </HBox>
+
+                                <Text text="{mainModel>Authorizationtype}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</f:content>
+			<!-- DynamicPage Footer -->
+			<f:footer>
+				<OverflowToolbar>
+					<ToolbarSpacer/>
+					<Button type="Emphasized" text="{i18n>changeselectedentries}" press=".onPressChange"/>
+				</OverflowToolbar>
+			</f:footer>
+		</f:DynamicPage>
+</mvc:View>
